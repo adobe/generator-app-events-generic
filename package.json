@@ -1,0 +1,45 @@
+{
+  "name": "@adobe/generator-app-events-generic",
+  "description": "Adds event registrations and a generic action",
+  "version": "0.1.0",
+  "keywords": [
+    "ecosystem:aio-app-builder-templates"
+  ],
+  "dependencies": {
+    "@adobe/generator-app-common-lib": "^0.4.0",
+    "upath": "^1.2.0",
+    "yeoman-environment": "^3",
+    "yeoman-generator": "^5"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@adobe/aio-lib-template-validation": "^4.0.0",
+    "@adobe/eslint-config-aio-lib-config": "^2.0.1",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-jsdoc": "^42.0.0",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "fs-extra": "^10",
+    "jest": "^27",
+    "js-yaml": "^4.1.0",
+    "lodash.clonedeep": "^4.5.0",
+    "stdout-stderr": "^0.1.13",
+    "typescript": "^5.1.6",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^6.3.0"
+  },
+  "scripts": {
+    "validate": "tv run-checks .",
+    "test": "npm run lint && npm run unit-tests && npm run validate",
+    "lint": "eslint .",
+    "unit-tests": "jest -c ./jest.config.js"
+  },
+  "engines": {
+    "node": "^14.18 || ^16.13 || >=18"
+  }
+}
