@@ -38,7 +38,6 @@ class EventsAppGenerator extends Generator {
       'full-key-to-manifest': this.keyToManifest,
       'full-key-to-events-manifest': this.keytoEventsManifest
     }
-    console.log(JSON.stringify(options))
     this.composeWith({
       Generator: EventsStandardGenerator,
       path: 'unknown'
