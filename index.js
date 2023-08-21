@@ -9,35 +9,41 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { EventsGenerator, commonTemplates } = require('@adobe/generator-app-common-lib')
+const { constants } = require('@adobe/generator-app-common-lib')
+const EventsStandardGenerator = require('@adobe/generator-add-events-generic')
+const Generator = require('yeoman-generator')
 const path = require('path')
 
-class EventsStandardGenerator extends EventsGenerator {
+class EventsAppGenerator extends Generator {
   constructor (args, opts) {
     super(args, opts)
-    this.props = {}
+
+    // options are inputs from CLI or yeoman parent generator
+    this.option('skip-prompt', { default: false })
+    this.option('is-test', { default: false })
   }
 
-  async prompting () {
-    this.props.regDetails = await this.promptForEventsDetails({ regName: 'Event Registration Default', regDesc: 'Registration for IO Events' })
-  }
+  async initializing () {
+    // All paths are relative to root
+    this.appFolder = '.'
+    this.actionFolder = path.join(this.appFolder, constants.actionsDirname)
+    this.configPath = path.join(this.appFolder, constants.appConfigFile)
+    this.keyToManifest = 'application.' + constants.runtimeManifestKey
+    this.keytoEventsManifest = 'application.events'
 
-  writing () {
-    if (this.props.regDetails) {
-      this.sourceRoot(path.join(__dirname, './templates'))
-
-      this.addEvents(this.props.regDetails, './events-generic.js', {
-        testFile: './test/events-generic.test.js',
-        sharedLibFile: commonTemplates.utils,
-        sharedLibTestFile: commonTemplates['utils.test'],
-        actionManifestConfig: {
-          web: 'no',
-          inputs: { LOG_LEVEL: 'debug' },
-          annotations: { 'require-adobe-auth': false, final: true }
-        }
-      })
+    const options = {
+      // forward needed args
+      'action-folder': this.actionFolder,
+      'config-path': this.configPath,
+      'full-key-to-manifest': this.keyToManifest,
+      'full-key-to-events-manifest': this.keytoEventsManifest
     }
+    console.log(JSON.stringify(options))
+    this.composeWith({
+      Generator: EventsStandardGenerator,
+      path: 'unknown'
+    }, options)
   }
 }
 
-module.exports = EventsStandardGenerator
+module.exports = EventsAppGenerator

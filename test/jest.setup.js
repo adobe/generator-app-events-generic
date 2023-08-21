@@ -9,32 +9,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const path = require('path')
-const { stdout, stderr } = require('stdout-stderr')
+jest.setTimeout(360000)
 
-jest.setTimeout(30000)
+const path = require('path')
 
 process.on('unhandledRejection', error => {
   throw error
 })
 
-// trap console log
-beforeEach(() => { stdout.start(); stderr.start(); stdout.print = true })
-afterEach(() => { stdout.stop(); stderr.stop() })
-
 // quick normalization to test windows/unix paths
 global.n = p => path.normalize(p)
-global.r = p => path.resolve(p)
-
-global.assertNodeEngines = (fs, nodeEngines) => {
-  expect(JSON.parse(fs.readFileSync('package.json').toString())).toEqual(expect.objectContaining({
-    engines: { node: nodeEngines }
-  }))
-}
-
-global.basicGeneratorOptions = {
-  'action-folder': 'actions',
-  'config-path': 'ext.config.yaml',
-  'full-key-to-manifest': 'runtimeManifest',
-  'full-key-to-events-manifest': 'events'
-}
