@@ -18,8 +18,7 @@ module.exports = {
     './index.js'
   ],
   testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/templates/'
+    '<rootDir>/node_modules/'
   ],
   coverageThreshold: {
     global: {
