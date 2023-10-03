@@ -28,6 +28,7 @@ class EventsAppGenerator extends Generator {
     this.appFolder = '.'
     this.actionFolder = path.join(this.appFolder, constants.actionsDirname)
     this.configPath = path.join(this.appFolder, constants.appConfigFile)
+    this.eventsConfigPath = path.join(this.appFolder, constants.appConfigFile)
     this.keyToManifest = 'application.' + constants.runtimeManifestKey
     this.keytoEventsManifest = 'application.events'
 
@@ -35,6 +36,7 @@ class EventsAppGenerator extends Generator {
       // forward needed args
       'action-folder': this.actionFolder,
       'config-path': this.configPath,
+      'events-config-path': this.eventsConfigPath,
       'full-key-to-manifest': this.keyToManifest,
       'full-key-to-events-manifest': this.keytoEventsManifest
     }

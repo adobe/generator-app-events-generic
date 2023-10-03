@@ -37,6 +37,7 @@ describe('run', () => {
     // forward needed args
     'action-folder': 'actions',
     'config-path': 'app.config.yaml',
+    'events-config-path': 'app.config.yaml',
     'full-key-to-manifest': 'application.runtimeManifest',
     'full-key-to-events-manifest': 'application.events'
   }
